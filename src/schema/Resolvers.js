@@ -1,9 +1,10 @@
+const knex = require("../db/db");
 const resolvers = {
     Query: {
-        getAllUsers() {
-            return [{ name: "Adib", age: 30 }];
-        }
+        planets() {
+            return knex("planets").select("*");
+        },
     },
 };
 
-module.exports = { resolvers }
+module.exports = { resolvers };

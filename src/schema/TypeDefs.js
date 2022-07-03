@@ -1,14 +1,15 @@
 const { gql } = require("apollo-server-koa");
 
 const typeDefs = gql `
-  type User {
+  type Planet {
+    id: Int!
     name: String!
-    age: Int!
+    code: String!
   }
 
   #Queries
-  type Query{
-    getAllUsers: [User!]!
+  type Query {
+    planets: [Planet!]!
   }
 `;
 
