@@ -5,9 +5,8 @@
 exports.up = function(knex) {
     return knex.schema.createTable("planets", function(table) {
         table.increments("id");
-        table.string("name", 255).notNullable();
-        table.string("code", 255).notNullable();
-        table.timestamps();
+        table.string("name").notNullable();
+        table.string("code").notNullable();
     });
 };
 
