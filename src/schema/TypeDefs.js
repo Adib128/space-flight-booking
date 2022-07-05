@@ -43,6 +43,18 @@ const typeDefs = gql `
     nodes: [Flight!]
   }
 
+  type Booking {
+    id: ID!
+    flight: Flight!
+    seatCount: Int!
+    email: String!
+  }
+
+  type BookingPagination {
+    pagination: Pagination
+    nodes: [Booking!]
+  }
+
   #Queries
   type Query {
     planets: [Planet!]!
@@ -50,6 +62,8 @@ const typeDefs = gql `
     spaceCenter(id: ID, uid: String): SpaceCenter!
     flights(page: Int, pageSize: Int): FlightPagination!
     flight(id: ID!): Flight!
+    bookings(page: Int, pageSize: Int, email: String): BookingPagination!
+    booking(id: ID!): Booking!
   }
 
   scalar DateTime

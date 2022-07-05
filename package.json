@@ -5,8 +5,8 @@
     "main": "index.js",
     "scripts": {
         "dev": "nodemon src/index.js",
-        "migrate": "npx knex migrate:latest --knexfile src/db/knexfile.js",
-        "seed": "npx knex seed:run --knexfile src/db/knexfile.js"
+        "migrate": "npx knex migrate:latest --knexfile src/database/knexfile.js",
+        "seed": "npx knex seed:run --knexfile src/database/knexfile.js"
     },
     "author": {
         "name": "Mohamed Adib Aouadi",
