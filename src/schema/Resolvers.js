@@ -1,51 +1,33 @@
-const knex = require("../db/db");
-const { attachPaginate } = require("knex-paginate");
-attachPaginate();
+const { GraphQLDateTime } = require("graphql-iso-date");
+const planetController = require("../controllers/PlanetController");
+const spaceCenterController = require("../controllers/SpaceCenterController");
+const flightController = require("../controllers/FlightController");
+const knex = require("../database/connect.js");
+
+
 const resolvers = {
     Query: {
-        planets: async() => {
-            return await knex("planets").select("*");
-        },
-        spaceCenters: async(__, args) => {
-            const centers = await knex("space_centers").paginate({
-                perPage: args.pageSize,
-                currentPage: args.page,
-                isLengthAware: true,
-            });
-            const data = {
-                pagination: {
-                    total: centers.pagination.total,
-                    page: centers.pagination.currentPage,
-                    pageSize: centers.pagination.perPage,
-                },
-                nodes: centers.data,
-            };
-            return data;
-        },
-        spaceCenter: async(__, args) => {
-            if (!args.id && !args.uid) {
-                throw new Error("Specify id or uid of the space center");
-            }
-            return await knex("space_centers").where(args).first();
-        },
+        planets: planetController.findAll,
+        spaceCenters: spaceCenterController.findAll,
+        spaceCenter: spaceCenterController.findOne,
+        flights: flightController.findAll,
+        flight: flightController.findOne,
     },
 
     Planet: {
-        spaceCenters: async(planet, args) => {
-            return await knex("space_centers")
-                .where({ planet_code: planet.code })
-                .select("*")
-                .limit(args.limit);
-        },
+        spaceCenters: spaceCenterController.findByPlanetCode,
     },
 
     SpaceCenter: {
-        planet: async(spaceCenter, args) => {
-            return await knex("planets")
-                .where({ code: spaceCenter.planet_code })
-                .first();
-        },
+        planet: planetController.findByCode,
     },
+
+    Flight: {
+        launchSite: spaceCenterController.launchSite,
+        landingSite: spaceCenterController.landingSite,
+    },
+
+    DateTime: GraphQLDateTime,
 };
 
 module.exports = { resolvers };
