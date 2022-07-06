@@ -14,7 +14,12 @@ const resolvers = {
         flights: flightController.findAll,
         flight: flightController.findOne,
         bookings: bookingController.findAll,
-        booking: bookingController.findOne
+        booking: bookingController.findOne,
+    },
+
+    Mutation: {
+        scheduleFlight: flightController.create,
+        bookFlight: bookingController.create,
     },
 
     Planet: {
@@ -31,7 +36,7 @@ const resolvers = {
     },
 
     Booking: {
-        flight: flightController.findOne
+        flight: flightController.findOne,
     },
 
     DateTime: GraphQLDateTime,

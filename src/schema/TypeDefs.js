@@ -66,6 +66,24 @@ const typeDefs = gql `
     booking(id: ID!): Booking!
   }
 
+  type Mutation {
+    scheduleFlight(input: flightInfo): Flight
+    bookFlight(input: bookingInfo): Booking
+  }
+
+  input flightInfo {
+    launchSiteId: Int!
+    landingSiteId: Int!
+    departureAt: DateTime!
+    seatCount: Int!
+  }
+
+  input bookingInfo {
+    seatCount: Int!
+    flightId: Int!
+    email: String!
+  }
+
   scalar DateTime
 `;
 

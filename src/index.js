@@ -12,7 +12,6 @@ const server = new ApolloServer({
     csrfPrevention: true,
     cache: "bounded",
     introspection: true,
-    playground: true,
 });
 
 server.start().then((res) => {
