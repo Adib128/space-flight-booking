@@ -3,8 +3,6 @@ const planetController = require("../controllers/PlanetController");
 const spaceCenterController = require("../controllers/SpaceCenterController");
 const flightController = require("../controllers/FlightController");
 const bookingController = require("../controllers/BookingController");
-const knex = require("../database/connect.js");
-
 
 const resolvers = {
     Query: {
@@ -42,4 +40,4 @@ const resolvers = {
     DateTime: GraphQLDateTime,
 };
 
-module.exports = { resolvers };
+module.exports = resolvers;

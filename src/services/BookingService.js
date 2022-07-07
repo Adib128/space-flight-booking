@@ -1,9 +1,13 @@
 const knex = require("../database/connect.js");
 
 const findAll = async(args) => {
-    const bookings = await knex("bookings").where({
-        email: args.email
-    }).paginate({
+    const query = knex("bookings");
+    if (args.email) {
+        query.where({
+            email: args.email
+        });
+    }
+    bookings = await query.paginate({
         perPage: args.pageSize,
         currentPage: args.page,
         isLengthAware: true,

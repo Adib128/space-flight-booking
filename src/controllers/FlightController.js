@@ -11,7 +11,7 @@ exports.findOne = async(__, args) => {
 
 exports.create = async(__, args) => {
     const flight = {
-        code: "a",
+        code: "test code",
         launchSite: args.input.launchSiteId,
         landingSite: args.input.landingSiteId,
         departureAt: args.input.departureAt,

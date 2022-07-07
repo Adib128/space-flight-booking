@@ -1,7 +1,19 @@
 const knex = require("../database/connect.js");
 
 const findAll = async(args) => {
-    const flights = await knex("flights").paginate({
+    const query = knex("flights");
+    const where = {};
+    if (args.from) {
+        where.launchSite = args.from;
+    }
+    if (args.to) {
+        where.landingSite = args.to;
+    }
+    if (args.departureAt) {
+        where.landingSite = args.departureAt;
+    }
+    query.where(where);
+    const flights = query.paginate({
         perPage: args.pageSize,
         currentPage: args.page,
         isLengthAware: true,
