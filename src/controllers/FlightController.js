@@ -1,4 +1,3 @@
-const knex = require("../database/connect.js");
 const flightService = require("../services/FlightService");
 
 exports.findAll = async(__, args) => {
@@ -10,14 +9,6 @@ exports.findOne = async(__, args) => {
 };
 
 exports.create = async(__, args) => {
-    const flight = {
-        code: "test code",
-        launchSite: args.input.launchSiteId,
-        landingSite: args.input.landingSiteId,
-        departureAt: args.input.departureAt,
-        seatCount: args.input.seatCount,
-        availableSeats: args.input.seatCount,
-    };
-    const data = await knex("flights").returning("id").insert(flight);
-    return await flightService.findOne(data[0]);
+    const insertedId = flightService.create(args.input);
+    return await flightService.findOne(insertedId);
 };

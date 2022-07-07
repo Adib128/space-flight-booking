@@ -1,4 +1,5 @@
 const { gql } = require("apollo-server-koa");
+
 const flightSchema = gql `
   type Flight {
     id: ID!
@@ -18,7 +19,7 @@ const flightSchema = gql `
   input flightInfo {
     launchSiteId: Int!
     landingSiteId: Int!
-    departureAt: DateTime!
+    departureAt: DateTime! 
     seatCount: Int!
   }
 `;

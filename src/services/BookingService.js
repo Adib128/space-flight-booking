@@ -26,7 +26,18 @@ const findOne = async(args) => {
     return await knex("bookings").where(args).first();
 };
 
+const create = async(input) => {
+    const booking = {
+        seatCount: input.seatCount,
+        flight: input.flightId,
+        email: input.email
+    };
+    const insertedData = await knex("bookings").returning("id").insert(booking);
+    return insertedData[0];
+}
+
 module.exports = {
     findAll,
-    findOne
+    findOne,
+    create
 };

@@ -8,11 +8,11 @@ const bookingSchema = require("./booking");
 const baseSchema = gql `
   type Query {
     planets: [Planet!]!
-    spaceCenters(page: Int, pageSize: Int): SpaceCenterPagination!
+    spaceCenters(page: Int = 1, pageSize: Int = 10): SpaceCenterPagination!
     spaceCenter(id: ID, uid: String): SpaceCenter!
-    flights(from: Int, to: Int, page: Int, pageSize: Int): FlightPagination!
+    flights(from: Int, to: Int, page: Int = 1, pageSize: Int = 10): FlightPagination!
     flight(id: ID!): Flight!
-    bookings(page: Int, pageSize: Int, email: String): BookingPagination!
+    bookings(page: Int = 1, pageSize: Int = 10, email: String): BookingPagination!
     booking(id: ID!): Booking!
   }
 

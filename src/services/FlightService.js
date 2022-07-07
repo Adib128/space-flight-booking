@@ -1,4 +1,5 @@
 const knex = require("../database/connect.js");
+const crypto = require("crypto");
 
 const findAll = async(args) => {
     const query = knex("flights");
@@ -31,7 +32,21 @@ const findOne = async(args) => {
     return await knex("flights").where(args).first();
 };
 
+const create = async(input) => {
+    const flight = {
+        code: crypto.randomBytes(16).toString("hex"),
+        launchSite: input.launchSiteId,
+        landingSite: input.landingSiteId,
+        departureAt: input.departureAt,
+        seatCount: input.seatCount,
+        availableSeats: input.seatCount,
+    };
+    const insertedData = await knex("flights").returning("id").insert(flight);
+    return insertedData[0];
+};
+
 module.exports = {
     findAll,
     findOne,
+    create
 };

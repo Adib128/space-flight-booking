@@ -14,25 +14,18 @@
     },
     "license": "ISC",
     "devDependencies": {
-        "nodemon": "^2.0.18"
+        "nodemon": "^2.0.19"
     },
     "dependencies": {
         "@koa/router": "^10.1.1",
-        "apollo-server": "^3.9.0",
-        "apollo-server-core": "^3.9.0",
         "apollo-server-koa": "^3.9.0",
-        "body-parser": "^1.20.0",
-        "cors": "^2.8.5",
+        "crypto-js": "^4.1.1",
         "graphql": "^16.5.0",
         "graphql-constraint-directive": "^3.1.1",
-        "graphql-date-scalars": "^0.1.4",
         "graphql-iso-date": "^3.6.1",
-        "graphql-scalars": "^1.17.0",
-        "install": "^0.13.0",
         "knex": "^2.1.0",
         "knex-paginate": "^3.0.1",
         "koa": "^2.13.4",
-        "npm": "^8.13.2",
         "pg": "^8.7.3"
     }
 }

@@ -4,7 +4,7 @@ const planetSchema = gql `
     id: ID!
     name: String!
     code: String!
-    spaceCenters(limit: Int): [SpaceCenter!]
+    spaceCenters(limit: Int = 5): [SpaceCenter!]
   }
 `;
 

@@ -20,5 +20,5 @@ exports.landingSite = async(flight) => {
 };
 
 exports.findByPlanetCode = async(planet, args) => {
-    return await this.spaceCenterService.findByPlanetCode(planet.code, args.limit);
+    return await spaceCenterService.findByPlanetCode(planet.code, args.limit);
 };
