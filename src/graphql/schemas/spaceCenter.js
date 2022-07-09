@@ -3,6 +3,7 @@ const spaceCenterSchema = gql `
   type SpaceCenter {
     id: ID!
     uid: String!
+    name: String!
     description: String!
     latitude: Float!
     longitude: Float!

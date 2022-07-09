@@ -9,6 +9,6 @@ exports.findOne = async(__, args) => {
 };
 
 exports.create = async(__, args) => {
-    const insertedId = flightService.create(args.input);
+    const insertedId = await flightService.create(args.input);
     return await flightService.findOne(insertedId);
 };

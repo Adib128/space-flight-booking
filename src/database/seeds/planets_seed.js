@@ -1,4 +1,4 @@
-const planetsData = require("../../data/planets");
+const planetsData = require("../../../data/planets");
 
 exports.seed = function(knex) {
     // Deletes ALL existing entries

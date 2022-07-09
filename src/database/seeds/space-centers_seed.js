@@ -1,4 +1,4 @@
-const centersData = require("../../data/space-centers");
+const spaceCentersData = require("../../../data/space-centers");
 
 exports.seed = function(knex) {
     // Deletes ALL existing entries
@@ -6,6 +6,6 @@ exports.seed = function(knex) {
         .del()
         .then(function() {
             // Inserts seed entries
-            return knex("space_centers").insert(centersData);
+            return knex("space_centers").insert(spaceCentersData);
         });
 };

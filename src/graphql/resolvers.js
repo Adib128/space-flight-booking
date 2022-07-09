@@ -1,4 +1,4 @@
-const { GraphQLDateTime } = require("graphql-iso-date");
+const { GraphQLDateTime, GraphQLDate } = require("graphql-iso-date");
 const planetController = require("../controllers/PlanetController");
 const spaceCenterController = require("../controllers/SpaceCenterController");
 const flightController = require("../controllers/FlightController");
@@ -38,6 +38,7 @@ const resolvers = {
     },
 
     DateTime: GraphQLDateTime,
+    Date: GraphQLDate,
 };
 
 module.exports = resolvers;

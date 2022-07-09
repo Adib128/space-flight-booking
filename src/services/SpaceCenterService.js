@@ -22,7 +22,7 @@ const findOne = async(args) => {
     return await knex("space_centers").where(args).first();
 };
 
-const findOneById = async(id) => {
+const findById = async(id) => {
     return await knex("space_centers").where({ id: id }).first();
 };
 
@@ -36,6 +36,6 @@ const findByPlanetCode = async(code, limit) => {
 module.exports = {
     findAll,
     findOne,
-    findOneById,
-    findByPlanetCode
+    findById,
+    findByPlanetCode,
 };

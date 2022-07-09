@@ -10,9 +10,20 @@ const baseSchema = gql `
     planets: [Planet!]!
     spaceCenters(page: Int = 1, pageSize: Int = 10): SpaceCenterPagination!
     spaceCenter(id: ID, uid: String): SpaceCenter!
-    flights(from: Int, to: Int, page: Int = 1, pageSize: Int = 10): FlightPagination!
+    flights(
+      from: Int
+      to: Int
+      seatCount: Int
+      departureDay: Date
+      page: Int = 1
+      pageSize: Int = 10
+    ): FlightPagination!
     flight(id: ID!): Flight!
-    bookings(page: Int = 1, pageSize: Int = 10, email: String): BookingPagination!
+    bookings(
+      page: Int = 1
+      pageSize: Int = 10
+      email: String
+    ): BookingPagination!
     booking(id: ID!): Booking!
   }
 
@@ -28,6 +39,7 @@ const baseSchema = gql `
   }
 
   scalar DateTime
+  scalar Date
 `;
 
 module.exports = [
