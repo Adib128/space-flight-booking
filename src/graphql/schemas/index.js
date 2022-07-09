@@ -13,7 +13,7 @@ const baseSchema = gql `
     flights(
       from: Int
       to: Int
-      seatCount: Int
+      seatCount: Int!
       departureDay: Date
       page: Int = 1
       pageSize: Int = 10

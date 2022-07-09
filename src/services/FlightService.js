@@ -1,16 +1,15 @@
 const knex = require("../database/connect.js");
 const crypto = require("crypto");
+const paginationHandler = require("./utils");
 
 const findAll = async(args) => {
     const flights = await knex("flights").andWhere(function() {
+        this.where("seatCount", args.seatCount);
         if (args.from) {
             this.where("launchSite", args.from);
         }
         if (args.to) {
             this.where("landingSite", args.to);
-        }
-        if (args.seatCount) {
-            this.where("seatCount", args.seatCount);
         }
         if (args.departureDay) {
             this.where("departureAt", "=", args.departureDay);
@@ -20,15 +19,9 @@ const findAll = async(args) => {
         currentPage: args.page,
         isLengthAware: true,
     });
-    return {
-        pagination: {
-            total: flights.pagination.total,
-            page: flights.pagination.currentPage,
-            pageSize: flights.pagination.perPage,
-        },
-        nodes: flights.data,
-    };
+    return paginationHandler(flights);
 };
+
 const findOne = async(args) => {
     return await knex("flights").where(args).first();
 };

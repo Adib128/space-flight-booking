@@ -1,5 +1,6 @@
 const knex = require("../database/connect.js");
 const { attachPaginate } = require("knex-paginate");
+const paginationHandler = require("./utils");
 attachPaginate();
 
 const findAll = async(args) => {
@@ -8,14 +9,7 @@ const findAll = async(args) => {
         currentPage: args.page,
         isLengthAware: true,
     });
-    return {
-        pagination: {
-            total: spaceCenters.pagination.total,
-            page: spaceCenters.pagination.currentPage,
-            pageSize: spaceCenters.pagination.perPage,
-        },
-        nodes: spaceCenters.data,
-    };
+    return paginationHandler(flights);
 };
 
 const findOne = async(args) => {

@@ -1,4 +1,5 @@
 const knex = require("../database/connect.js");
+const paginationHandler = require("./utils");
 
 const findAll = async(args) => {
     const query = knex("bookings");
@@ -12,14 +13,7 @@ const findAll = async(args) => {
         currentPage: args.page,
         isLengthAware: true,
     });
-    return {
-        pagination: {
-            total: bookings.pagination.total,
-            page: bookings.pagination.currentPage,
-            pageSize: bookings.pagination.perPage,
-        },
-        nodes: bookings.data,
-    };
+    return paginationHandler(flights);
 };
 
 const findOne = async(args) => {

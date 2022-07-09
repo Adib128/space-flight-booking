@@ -7,6 +7,7 @@ const {
     flightQuery,
     scheduleFlightInput,
     scheduleFlightMutation,
+    flightId,
     scheduleFlightInvalidMutation,
 } = require("./utils/queries");
 
@@ -21,7 +22,6 @@ beforeAll(async() => {
 afterAll(async() => {
     await server.stop();
 });
-
 describe("Test for the mutation", () => {
     it("It should create new flight and returning the flight information", async() => {
 
@@ -57,16 +57,6 @@ describe("Test for the mutation with invalid input", () => {
         expect(errors[0].extensions).toMatchObject({ code: "BAD_USER_INPUT" });
     });
 });
-
-let flightId;
-beforeEach(async() => {
-    flightId = await knex("flights")
-        .returning("id")
-        .insert(scheduleFlightInput);
-    console.log(flightId);
-    flightId = "73";
-});
-
 
 describe("Test for the flight query", () => {
     it("It should return the flight information by Id", async() => {
