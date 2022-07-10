@@ -1,19 +1,18 @@
 const knex = require("../database/connect.js");
-const paginationHandler = require("./utils");
+const { validateParamsOrThrowError, paginationHandler } = require("./utils");
 
 const findAll = async(args) => {
-    const query = knex("bookings");
-    if (args.email) {
-        query.where({
-            email: args.email
-        });
-    }
-    bookings = await query.paginate({
+    validateParamsOrThrowError(args.page, args.pageSize);
+    const bookings = await knex("bookings").where(function() {
+        if (args.email) {
+            this.where("email", args.email);
+        }
+    }).paginate({
         perPage: args.pageSize,
         currentPage: args.page,
         isLengthAware: true,
     });
-    return paginationHandler(flights);
+    return paginationHandler(bookings);
 };
 
 const findOne = async(args) => {

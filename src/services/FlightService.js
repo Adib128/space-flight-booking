@@ -1,8 +1,9 @@
 const knex = require("../database/connect.js");
 const crypto = require("crypto");
-const paginationHandler = require("./utils");
+const { validateParamsOrThrowError, paginationHandler } = require("./utils");
 
 const findAll = async(args) => {
+    validateParamsOrThrowError(args.page, args.pageSize);
     const flights = await knex("flights").andWhere(function() {
         this.where("seatCount", args.seatCount);
         if (args.from) {
