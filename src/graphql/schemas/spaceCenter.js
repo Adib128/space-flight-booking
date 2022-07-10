@@ -14,6 +14,11 @@ const spaceCenterSchema = gql `
     pagination: Pagination
     nodes: [SpaceCenter!]
   }
+
+  extend type Query {
+    spaceCenters(page: Int = 1, pageSize: Int = 10): SpaceCenterPagination!
+    spaceCenter(id: ID, uid: String): SpaceCenter!
+  }
 `;
 
 module.exports = spaceCenterSchema;

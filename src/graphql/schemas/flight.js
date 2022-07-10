@@ -19,8 +19,24 @@ const flightSchema = gql `
   input flightInfo {
     launchSiteId: Int!
     landingSiteId: Int!
-    departureAt: DateTime! 
+    departureAt: DateTime!
     seatCount: Int!
+  }
+
+  extend type Query {
+    flights(
+      from: Int
+      to: Int
+      seatCount: Int!
+      departureDay: Date
+      page: Int = 1
+      pageSize: Int = 10
+    ): FlightPagination!
+    flight(id: ID!): Flight!
+  }
+
+  extend type Mutation {
+    bookFlight(input: bookingInfo): Booking!
   }
 `;
 

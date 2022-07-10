@@ -6,6 +6,10 @@ const planetSchema = gql `
     code: String!
     spaceCenters(limit: Int = 5): [SpaceCenter!]
   }
+
+  extend type Query {
+    planets: [Planet!]!
+  }
 `;
 
 module.exports = planetSchema;

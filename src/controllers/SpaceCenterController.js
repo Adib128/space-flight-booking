@@ -1,4 +1,5 @@
 const spaceCenterService = require("../services/SpaceCenterService");
+const { UserInputError } = require("apollo-server-koa");
 
 exports.findAll = async(__, args) => {
     return await spaceCenterService.findAll(args);
@@ -6,7 +7,7 @@ exports.findAll = async(__, args) => {
 
 exports.findOne = async(__, args) => {
     if (!args.id && !args.uid) {
-        throw new Error("Specify id or uid of the space center");
+        throw new UserInputError("Specify id or uid of the space center");
     }
     return await spaceCenterService.findOne(args);
 };
