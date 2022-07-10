@@ -1,6 +1,6 @@
 const { ApolloServer } = require("apollo-server-koa");
 const typeDefs = require("./graphql/schemas/index");
-const resolvers = require("./graphql/resolvers");
+const resolvers = require("./graphql/resolvers/index");
 const auth = require("./auth");
 
 const server = new ApolloServer({

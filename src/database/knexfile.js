@@ -6,11 +6,7 @@
 module.exports = {
     development: {
         client: "postgresql",
-        connection: {
-            database: "space",
-            user: "postgres",
-            password: "123456",
-        },
+        connection: "postgresql://admin:123456@db:5432/flight",
         pool: {
             min: 2,
             max: 10,
