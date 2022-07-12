@@ -10,7 +10,7 @@
 $ cd space-flight-booking
 # Rename the .env example file
 $ mv .env.example .env
-# Runing the docker container
+# Runing the docker containers
 $ docker-compose up
 
 ```
@@ -43,7 +43,7 @@ All the queries and the mutations are protected. They are accessed by sending th
 
 ```JSON
 {
-    Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
 }
 ```
 
