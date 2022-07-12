@@ -1,11 +1,11 @@
 const planetsData = require("../../../data/planets");
 
 exports.seed = function(knex) {
-    // Deletes ALL existing entries
+    // Deletes ALL existing planets
     return knex("planets")
         .del()
         .then(function() {
-            // Inserts seed entries
+            // Inserts planets entries
             return knex("planets").insert(planetsData);
         });
 };
