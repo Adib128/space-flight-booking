@@ -11,8 +11,8 @@ const server = new ApolloServer({
     context: auth,
     csrfPrevention: true,
     introspection: true,
-    //playground: true,
-    //plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
+    playground: true,
+    plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
 });
 
 module.exports = server;
