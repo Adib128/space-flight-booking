@@ -2,23 +2,18 @@ const server = require("../../src/server");
 const Koa = require("koa");
 const knex = require("../../src/database/connect.js");
 
-let url, path;
-
-const startServer = async() => {
-    await server.start();
+// Start new app and create new apollo server
+exports.startServer = async() => {
     const app = new Koa();
-    server.applyMiddleware({ app });
-    app.listen();
-    path = await server.graphqlPath;
+    await server.start();
+    await server.applyMiddleware({ app });
+    const path = server.graphqlPath;
+    // Return app and graphql path
+    return { app, path };
 }
 
-const stopServer = async() => {
+// Stop server and close database connection
+exports.stopServer = async() => {
     await server.stop();
+    await knex.destroy();
 }
-
-module.exports = {
-    startServer,
-    stopServer,
-    url,
-    path
-};

@@ -1,18 +1,15 @@
-const knex = require("../../src/database/connect.js");
-
-header = {
-    Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
-};
-
+// Schedule Flight Input
 const scheduleFlightInput = {
-    launchSiteId: 2,
-    landingSiteId: 3,
+    launchSiteId: 1,
+    landingSiteId: 2,
     departureAt: "2022-09-07T00:00:00Z",
     seatCount: 10,
 };
 
-const flightId = /* await knex("flights").returning("id").insert(scheduleFlightInput)[0];*/ 73;
+// static test ID
+const flightId = "1";
 
+// Query of returning flight by ID
 flightQuery = {
     query: `query flight($id: ID!) {
         flight(id: $id){
@@ -35,6 +32,7 @@ flightQuery = {
     variables: { id: flightId },
 };
 
+// Mutation of schedule flight
 scheduleFlightMutation = {
     query: `mutation ScheduleFlight($input: flightInfo) {
         scheduleFlight(input: $input) {
@@ -56,6 +54,7 @@ scheduleFlightMutation = {
     },
 };
 
+// Invalid Schedule Flight Input
 const scheduleFlightInvalidInput = {
     launchSiteId: "abcd",
     landingSiteId: "abcd",
@@ -63,6 +62,7 @@ const scheduleFlightInvalidInput = {
     seatCount: "abcd",
 };
 
+// Invalid mutation of schedule flight
 scheduleFlightInvalidMutation = {
     query: `mutation ScheduleFlight($input: flightInfo) {
         scheduleFlight(input: $input) {
@@ -82,6 +82,11 @@ scheduleFlightInvalidMutation = {
     variables: {
         input: scheduleFlightInvalidInput,
     },
+};
+
+// Static test header
+header = {
+    Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
 };
 
 module.exports = {

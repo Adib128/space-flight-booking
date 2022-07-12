@@ -1,3 +1,4 @@
+// Planets data for database seed
 module.exports = [{
         name: "Mercury",
         code: "MER",

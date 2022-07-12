@@ -10,6 +10,8 @@ const mainresolver = {
     DateTime: GraphQLDateTime,
     Date: GraphQLDate,
 };
+
+// Merge and export all resolvers
 const resolvers = _.merge(
     mainresolver,
     planetResolver,

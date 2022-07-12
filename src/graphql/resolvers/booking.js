@@ -1,6 +1,3 @@
-const { GraphQLDateTime, GraphQLDate } = require("graphql-iso-date");
-const planetController = require("../../controllers/PlanetController");
-const spaceCenterController = require("../../controllers/SpaceCenterController");
 const flightController = require("../../controllers/FlightController");
 const bookingController = require("../../controllers/BookingController");
 
@@ -15,8 +12,8 @@ const bookingResolvers = {
     },
 
     Booking: {
-        flight: flightController.findOne,
-    }
+        flight: flightController.findByBookingId,
+    },
 };
 
 module.exports = bookingResolvers;

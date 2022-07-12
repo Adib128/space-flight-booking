@@ -1,31 +1,30 @@
 const request = require("supertest");
-const server = require("../src/server");
-const Koa = require("koa");
-const knex = require("../src/database/connect.js");
+const { startServer, stopServer } = require("./utils/server");
 const {
     header,
     flightQuery,
     scheduleFlightInput,
     scheduleFlightMutation,
     flightId,
-    scheduleFlightInvalidMutation,
+    scheduleFlightInvalidMutation
 } = require("./utils/queries");
 
-let url, path;
+let app, path;
+
 beforeAll(async() => {
-    await server.start();
-    const app = new Koa();
-    server.applyMiddleware({ app });
-    url = app.listen();
-    path = server.graphqlPath;
+    const server = await startServer();
+    app = server.app;
+    path = server.path;
 });
+
 afterAll(async() => {
-    await server.stop();
+    await stopServer();
 });
+
 describe("Test for the mutation", () => {
     it("It should create new flight and returning the flight information", async() => {
 
-        const result = await request(url)
+        const result = await request(app.callback())
             .post(path)
             .set(header)
             .send(scheduleFlightMutation);
@@ -38,14 +37,13 @@ describe("Test for the mutation", () => {
         expect(scheduleFlight.seatCount).toBe(scheduleFlightInput.seatCount);
         expect(scheduleFlight.launchSite).toHaveProperty("name");
         expect(scheduleFlight.landingSite).toHaveProperty("name");
-
     });
 });
 
 describe("Test for the mutation with invalid input", () => {
     it("It should return errors messages", async() => {
 
-        const result = await request(url)
+        const result = await request(app.callback())
             .post(path)
             .set(header)
             .send(scheduleFlightInvalidMutation);
@@ -61,7 +59,7 @@ describe("Test for the mutation with invalid input", () => {
 describe("Test for the flight query", () => {
     it("It should return the flight information by Id", async() => {
 
-        const result = await request(url).post(path).set(header).send(flightQuery);
+        const result = await request(app.callback()).post(path).set(header).send(flightQuery);
 
         const flight = result.body.data.flight;
         expect(result.errors).toBeUndefined();
