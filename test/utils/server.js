@@ -9,7 +9,7 @@ exports.startServer = async() => {
     await server.applyMiddleware({ app });
     const path = server.graphqlPath;
     // Return app and graphql path
-    return { app, path };
+    return { app, path, server };
 }
 
 // Stop server and close database connection

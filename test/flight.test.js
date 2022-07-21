@@ -6,7 +6,7 @@ const {
     scheduleFlightInput,
     scheduleFlightMutation,
     flightId,
-    scheduleFlightInvalidMutation
+    scheduleFlightInvalidMutation,
 } = require("./utils/queries");
 
 let app, path;
@@ -23,7 +23,6 @@ afterAll(async() => {
 
 describe("Test for the mutation", () => {
     it("It should create new flight and returning the flight information", async() => {
-
         const result = await request(app.callback())
             .post(path)
             .set(header)
@@ -42,7 +41,6 @@ describe("Test for the mutation", () => {
 
 describe("Test for the mutation with invalid input", () => {
     it("It should return errors messages", async() => {
-
         const result = await request(app.callback())
             .post(path)
             .set(header)
@@ -58,8 +56,10 @@ describe("Test for the mutation with invalid input", () => {
 
 describe("Test for the flight query", () => {
     it("It should return the flight information by Id", async() => {
-
-        const result = await request(app.callback()).post(path).set(header).send(flightQuery);
+        const result = await request(app.callback())
+            .post(path)
+            .set(header)
+            .send(flightQuery);
 
         const flight = result.body.data.flight;
         expect(result.errors).toBeUndefined();
